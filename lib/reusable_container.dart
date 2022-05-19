@@ -8,13 +8,15 @@ class ReusableCard extends StatelessWidget {
 
   //constructors are needed for the property that is to be set while using the class
   // ignore: use_key_in_widget_constructors
-  const ReusableCard({required this.colour});
+  const ReusableCard({required this.colour, required this.cardChild});
 
   final Color colour;
+  final Widget cardChild;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      child: cardChild,
       margin: const EdgeInsets.all(15.0),
       decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10.0)),

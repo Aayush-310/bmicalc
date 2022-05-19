@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'reusable_container.dart';
 
 //defining the constants
@@ -25,23 +26,45 @@ class _InputPageState extends State<InputPage> {
           Expanded(
             //first row with two containers
             child: Row(
-              children: const <Widget>[
+              children: <Widget>[
                 Expanded(
                   child: ReusableCard(
                     colour: activeCardColour,
+                    cardChild: Column(
+                      children: const <Widget>[
+                        Icon(
+                          FontAwesomeIcons.mars,
+                          size: 40.0,
+                        )
+                      ],
+                    ),
                   ),
                 ),
-                Expanded(child: ReusableCard(colour: activeCardColour))
+                Expanded(
+                    child: ReusableCard(
+                  colour: activeCardColour,
+                  cardChild: Column(
+                    children: const [
+                      Icon(
+                        FontAwesomeIcons.venus,
+                        size: 40.0,
+                      )
+                    ],
+                  ),
+                ))
               ],
             ),
           ),
           Expanded(
             //second row with one container
             child: Row(
-              children: const [
+              children: [
                 Expanded(
                     child: ReusableCard(
                   colour: activeCardColour,
+                  cardChild: Column(
+                    children: const [Icon(FontAwesomeIcons.mars)],
+                  ),
                 )),
               ],
             ),
@@ -49,11 +72,21 @@ class _InputPageState extends State<InputPage> {
           Expanded(
             //last row with two expanded containers
             child: Row(
-              children: const [
+              children: [
                 Expanded(
-                  child: ReusableCard(colour: activeCardColour),
+                  child: ReusableCard(
+                    colour: activeCardColour,
+                    cardChild: Column(
+                      children: const [Icon(FontAwesomeIcons.mars)],
+                    ),
+                  ),
                 ),
-                Expanded(child: ReusableCard(colour: activeCardColour))
+                Expanded(
+                    child: ReusableCard(
+                  colour: activeCardColour,
+                  cardChild:
+                      Column(children: const [Icon(FontAwesomeIcons.mars)]),
+                ))
               ],
             ),
           ),
