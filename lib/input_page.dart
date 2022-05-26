@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'reusable_container.dart';
 import 'icon_content.dart';
+import 'constants.dart';
 
 //defining the constants
 
-const double bottomContainerHeight = 80.0;
-const activeCardColour = Color(0xFF0e1436);
-const inactiveCardColour = Color(0xFF242933);
-const bottomContainerColour = Color(0xFFfe0167);
+//creating enum for gender types
+enum Gender {
+  male,
+  female,
+  none,
+}
 
 // new file  for the input_page
 // ignore: use_key_in_widget_constructors
@@ -18,27 +21,33 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Color maleCardColour = inactiveCardColour;
-  Color femaleCardColour = inactiveCardColour;
+  // Color maleCardColour = kaInactiveCardColour;
+  // Color femaleCardColour = kaInactiveCardColour;
   double _value = 10;
 
-  //1 for male and 2 for female
-  void updateColour(int gender) {
-    if (gender == 1) {
-      if (maleCardColour == inactiveCardColour) {
-        maleCardColour = activeCardColour;
-      } else {
-        maleCardColour = inactiveCardColour;
-      }
-    }
-    if (gender == 2) {
-      if (femaleCardColour == inactiveCardColour) {
-        femaleCardColour = activeCardColour;
-      } else {
-        femaleCardColour = inactiveCardColour;
-      }
-    }
-  }
+//initializing the selectGender variable with nullable property
+  Gender? selectedGender;
+
+  // void updateColour(Gender gender) {
+  //   if (gender == Gender.male) {
+  //     //using the ternary operator for if statements
+  //     maleCardColour == kaInactiveCardColour
+  //         ? kaActiveCardColour
+  //         : kaInactiveCardColour;
+  //     // if (maleCardColour == kaInactiveCardColour) {
+  //     //   maleCardColour = kaActiveCardColour;
+  //     // } else {
+  //     //   maleCardColour = kaInactiveCardColour;
+  //     // }
+  //   }
+  //   if (gender == Gender.female) {
+  //     if (femaleCardColour == kaInactiveCardColour) {
+  //       femaleCardColour = kaActiveCardColour;
+  //     } else {
+  //       femaleCardColour = kaInactiveCardColour;
+  //     }
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -53,54 +62,58 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
+                  child: ReusableCard(
+                    //using the onpress function passing
+                    onPress: () {
                       setState(() {
-                        updateColour(1);
+                        selectedGender = Gender.male;
                       });
                     },
-                    child: ReusableCard(
-                      colour: maleCardColour,
-                      cardChild: IconContent(
-                        icon: FontAwesomeIcons.mars,
-                        label: "MALE",
-                      ),
+                    //using ternary operator
+                    colour: selectedGender == Gender.male
+                        ? kaActiveCardColour
+                        : kaInactiveCardColour,
+                    cardChild: IconContent(
+                      icon: FontAwesomeIcons.mars,
+                      label: "MALE",
                     ),
                   ),
                 ),
                 Expanded(
-                    child: GestureDetector(
-                  onTap: () {
+                    child: ReusableCard(
+                  //using the on press function passing
+                  onPress: () {
                     setState(() {
-                      updateColour(2);
+                      selectedGender = Gender.female;
                     });
                   },
-                  child: ReusableCard(
-                    colour: femaleCardColour,
-                    cardChild: IconContent(
-                      icon: FontAwesomeIcons.venus,
-                      label: "FEMALE",
-                    ),
-                    //extracting the column with icon content
-                    // cardChild: Column(
-                    //   mainAxisAlignment: MainAxisAlignment.center,
-                    //   children: const <Widget>[
-                    //     Icon(
-                    //       FontAwesomeIcons.venus,
-                    //       size: 40.0,
-                    //       color: Color(0xFFeef1f9),
-                    //     ),
-                    //     SizedBox(
-                    //       height: 15.0,
-                    //     ),
-                    //     Text(
-                    //       "FEMALE",
-                    //       style:
-                    //           TextStyle(fontSize: 15.0, color: Color(0xFFeef1f9)),
-                    //     ),
-                    //   ],
-                    // ),
+                  //using a ternary operator
+                  colour: selectedGender == Gender.female
+                      ? kaActiveCardColour
+                      : kaInactiveCardColour,
+                  cardChild: IconContent(
+                    icon: FontAwesomeIcons.venus,
+                    label: "FEMALE",
                   ),
+                  //extracting the column with icon content
+                  // cardChild: Column(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: const <Widget>[
+                  //     Icon(
+                  //       FontAwesomeIcons.venus,
+                  //       size: 40.0,
+                  //       color: Color(0xFFeef1f9),
+                  //     ),
+                  //     SizedBox(
+                  //       height: 15.0,
+                  //     ),
+                  //     Text(
+                  //       "FEMALE",
+                  //       style:
+                  //           TextStyle(fontSize: 15.0, color: Color(0xFFeef1f9)),
+                  //     ),
+                  //   ],
+                  // ),
                 ))
               ],
             ),
@@ -121,9 +134,9 @@ class _InputPageState extends State<InputPage> {
                         ),
                         const Text("VALUE"),
                         Slider(
-                          activeColor: Color.fromARGB(255, 255, 255,
+                          activeColor: const Color.fromARGB(255, 255, 255,
                               255), // The color to use for the portion of the slider track that is active.
-                          inactiveColor: Color.fromARGB(255, 132, 130,
+                          inactiveColor: const Color.fromARGB(255, 132, 130,
                               130), // The color for the inactive portion of the slider track.
                           thumbColor: Colors.red,
                           min: 0.0,
@@ -137,7 +150,7 @@ class _InputPageState extends State<InputPage> {
                         ),
                       ],
                     ),
-                    color: activeCardColour,
+                    color: kaActiveCardColour,
                     margin: const EdgeInsets.all(10.0),
                   ),
                 ),
@@ -150,7 +163,7 @@ class _InputPageState extends State<InputPage> {
               children: <Widget>[
                 Expanded(
                   child: ReusableCard(
-                    colour: inactiveCardColour,
+                    colour: kaInactiveCardColour,
                     cardChild: IconContent(
                       label: "HELLO",
                       icon: FontAwesomeIcons.mars,
@@ -162,7 +175,7 @@ class _InputPageState extends State<InputPage> {
                 ),
                 Expanded(
                     child: ReusableCard(
-                        colour: inactiveCardColour,
+                        colour: kaInactiveCardColour,
                         cardChild: IconContent(
                             label: "HELLO", icon: FontAwesomeIcons.mars)
                         // Column(children: const [Icon(FontAwesomeIcons.mars)]),
@@ -175,8 +188,8 @@ class _InputPageState extends State<InputPage> {
           Expanded(
               child: Container(
             width: double.infinity,
-            height: bottomContainerHeight,
-            color: bottomContainerColour,
+            height: kaBottomContainerHeight,
+            color: kaBottomContaainerColour,
           ))
         ],
       ),
