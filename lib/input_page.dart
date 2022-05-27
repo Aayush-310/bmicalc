@@ -147,6 +147,7 @@ class _InputPageState extends State<InputPage> {
                           ),
                           Expanded(
                             child: Slider(
+                              thumbColor: const Color.fromARGB(0, 1, 30, 24),
                               min: 100,
                               max: 350,
                               activeColor: const Color.fromARGB(51, 2, 62, 11),
