@@ -24,6 +24,7 @@ class _InputPageState extends State<InputPage> {
   // Color maleCardColour = kaInactiveCardColour;
   // Color femaleCardColour = kaInactiveCardColour;
   double _value = 10;
+  int height = 100;
 
 //initializing the selectGender variable with nullable property
   Gender? selectedGender;
@@ -56,6 +57,7 @@ class _InputPageState extends State<InputPage> {
         title: const Text("BMI calculator"),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
             //first row with two containers
@@ -119,44 +121,89 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           Expanded(
-            //second row with one container
+              //second row with one container
 
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        const Text("HEIGHT"),
-                        const SizedBox(
-                          height: 3.0,
-                        ),
-                        const Text("VALUE"),
-                        Slider(
-                          activeColor: const Color.fromARGB(255, 255, 255,
-                              255), // The color to use for the portion of the slider track that is active.
-                          inactiveColor: const Color.fromARGB(255, 132, 130,
-                              130), // The color for the inactive portion of the slider track.
-                          thumbColor: Colors.red,
-                          min: 0.0,
-                          max: 100.0,
-                          value: _value,
-                          onChanged: (value) {
-                            setState(() {
-                              _value = value;
-                            });
-                          },
-                        ),
-                      ],
-                    ),
-                    color: kaActiveCardColour,
-                    margin: const EdgeInsets.all(10.0),
-                  ),
-                ),
-              ],
-            ),
-          ),
+              child: ReusableCard(
+                  colour: kaInactiveCardColour,
+                  cardChild: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const Text(
+                        "Height",
+                        style: kalabelTextStyle,
+                      ),
+                      Row(
+                        textBaseline: TextBaseline.alphabetic,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        children: [
+                          Text(
+                            height.toString(),
+                            style: kaNumberTextStyle,
+                          ),
+                          const Text(
+                            "cm",
+                            style: kalabelTextStyle,
+                          ),
+                          Expanded(
+                            child: Slider(
+                              min: 100,
+                              max: 350,
+                              activeColor: const Color.fromARGB(51, 2, 62, 11),
+                              inactiveColor:
+                                  const Color.fromARGB(199, 3, 239, 34),
+                              value: height.toDouble(),
+                              onChanged: (double newValue) {
+                                setState(() {
+                                  height = newValue.toInt();
+                                });
+                              },
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  ))
+              //  Row(
+              //   children: <Widget>[
+              //     Expanded(
+              //       child:
+              //        Container(
+              //         child: Column(
+              //           mainAxisAlignment: MainAxisAlignment.center,
+              //           children: <Widget>[
+              //             Text(
+              //               "HEIGHT",
+              //               style: kalabelTextStyle,
+              //             ),
+              //             const SizedBox(
+              //               height: 3.0,
+              //             ),
+              //             const Text("VALUE"),
+              //             Slider(
+              //               activeColor: const Color.fromARGB(255, 255, 255,
+              //                   255), // The color to use for the portion of the slider track that is active.
+              //               inactiveColor: const Color.fromARGB(255, 132, 130,
+              //                   130), // The color for the inactive portion of the slider track.
+              //               thumbColor: Colors.red,
+              //               min: 0.0,
+              //               max: 100.0,
+              //               value: _value,
+              //               onChanged: (value) {
+              //                 setState(() {
+              //                   _value = value;
+              //                 });
+              //               },
+              //             ),
+              //           ],
+              //         ),
+              //         color: kaActiveCardColour,
+              //         margin: const EdgeInsets.all(10.0),
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              ),
           Expanded(
             //last row with two expanded containers
             child: Row(
