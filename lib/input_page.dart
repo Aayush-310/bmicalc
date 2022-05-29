@@ -237,7 +237,7 @@ class _InputPageState extends State<InputPage> {
               child: Container(
             width: double.infinity,
             height: kaBottomContainerHeight,
-            color: kaBottomContaainerColour,
+            color: kaBottomContainerColour,
           ))
         ],
       ),

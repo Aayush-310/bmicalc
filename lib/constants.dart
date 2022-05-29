@@ -9,4 +9,4 @@ const kaNumberTextStyle =
 const double kaBottomContainerHeight = 80.0;
 const kaActiveCardColour = Color(0xFF0e1436);
 const kaInactiveCardColour = Color(0xFF242933);
-const kaBottomContaainerColour = Color(0xFFfe0167);
+const kaBottomContainerColour = Color(0xFFfe0167);
