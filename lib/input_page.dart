@@ -25,7 +25,7 @@ class _InputPageState extends State<InputPage> {
   // Color femaleCardColour = kaInactiveCardColour;
   double _value = 10;
   int height = 100;
-
+  int weight = 20;
 //initializing the selectGender variable with nullable property
   Gender? selectedGender;
 
@@ -146,19 +146,37 @@ class _InputPageState extends State<InputPage> {
                             style: kalabelTextStyle,
                           ),
                           Expanded(
-                            child: Slider(
-                              thumbColor: const Color.fromARGB(0, 1, 30, 24),
-                              min: 100,
-                              max: 350,
-                              activeColor: const Color.fromARGB(51, 2, 62, 11),
-                              inactiveColor:
-                                  const Color.fromARGB(199, 3, 239, 34),
-                              value: height.toDouble(),
-                              onChanged: (double newValue) {
-                                setState(() {
-                                  height = newValue.toInt();
-                                });
-                              },
+                            child: SliderTheme(
+                              data: SliderTheme.of(context).copyWith(
+                                thumbColor:
+                                    const Color.fromARGB(240, 200, 47, 47),
+                                activeTrackColor:
+                                    const Color.fromARGB(197, 136, 136, 223),
+                                overlayColor: Color.fromARGB(0x29, 9, 192, 248),
+                                thumbShape: const RoundSliderThumbShape(
+                                    enabledThumbRadius: 10.0,
+                                    disabledThumbRadius: 8.0,
+                                    elevation: 2.0,
+                                    pressedElevation: 7.0),
+                                overlayShape: const RoundSliderOverlayShape(
+                                    overlayRadius: 11.0),
+                              ),
+                              child: Slider(
+                                //for assigning just the thumb color
+                                //thumbColor: const Color.fromARGB(0, 1, 30, 24),
+                                min: 100,
+                                max: 350,
+                                // activeColor:
+                                //     const Color.fromARGB(51, 2, 62, 11),
+                                // inactiveColor:
+                                //     const Color.fromARGB(199, 3, 239, 34),
+                                value: height.toDouble(),
+                                onChanged: (double newValue) {
+                                  setState(() {
+                                    height = newValue.toInt();
+                                  });
+                                },
+                              ),
                             ),
                           )
                         ],
@@ -211,15 +229,35 @@ class _InputPageState extends State<InputPage> {
               children: <Widget>[
                 Expanded(
                   child: ReusableCard(
-                    colour: kaInactiveCardColour,
-                    cardChild: IconContent(
-                      label: "HELLO",
-                      icon: FontAwesomeIcons.mars,
-                    ),
-                    // Column(
-                    //   children: const [Icon(FontAwesomeIcons.mars)],
-                    // ),
-                  ),
+                      colour: kaInactiveCardColour,
+                      cardChild: Column(
+                        children: [
+                          Text(
+                            "Weight",
+                            style: kalabelTextStyle,
+                          ),
+                          Text(
+                            weight.toString(),
+                            style: kalabelTextStyle,
+                          ),
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              //crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                FloatingActionButton(
+                                    child: Icon(Icons.add), onPressed: () {}),
+                                FloatingActionButton(
+                                    onPressed: () {}, child: Icon(Icons.add))
+                              ],
+                            ),
+                          ),
+                        ],
+                      )
+                      // Column(
+                      //   children: const [Icon(FontAwesomeIcons.mars)],
+                      // ),
+                      ),
                 ),
                 Expanded(
                     child: ReusableCard(
