@@ -1,10 +1,10 @@
+import 'package:bmicalc/results_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'reusable_container.dart';
 import 'icon_content.dart';
 import 'constants.dart';
-
-//defining the constants
+import 'bottom_button.dart';
 
 //creating enum for gender types
 enum Gender {
@@ -17,15 +17,17 @@ enum Gender {
 // ignore: use_key_in_widget_constructors
 class InputPage extends StatefulWidget {
   @override
+  // ignore: library_private_types_in_public_api
   _InputPageState createState() => _InputPageState();
 }
 
 class _InputPageState extends State<InputPage> {
   // Color maleCardColour = kaInactiveCardColour;
   // Color femaleCardColour = kaInactiveCardColour;
-  double _value = 10;
+  //double _value = 10;
   int height = 100;
-  int weight = 20;
+  int weight = 30;
+  int age = 10;
 //initializing the selectGender variable with nullable property
   Gender? selectedGender;
 
@@ -54,7 +56,7 @@ class _InputPageState extends State<InputPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("BMI calculator"),
+        title: const Center(child: Text("BMI calculator")),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -65,7 +67,8 @@ class _InputPageState extends State<InputPage> {
               children: <Widget>[
                 Expanded(
                   child: ReusableCard(
-                    //using the onpress function passing
+                    boxShape: BoxShape.circle,
+                    //using the onpressed function passing
                     onPress: () {
                       setState(() {
                         selectedGender = Gender.male;
@@ -83,6 +86,7 @@ class _InputPageState extends State<InputPage> {
                 ),
                 Expanded(
                     child: ReusableCard(
+                  boxShape: BoxShape.circle,
                   //using the on press function passing
                   onPress: () {
                     setState(() {
@@ -125,6 +129,7 @@ class _InputPageState extends State<InputPage> {
 
               child: ReusableCard(
                   colour: kaInactiveCardColour,
+                  boxShape: BoxShape.rectangle,
                   cardChild: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -152,7 +157,8 @@ class _InputPageState extends State<InputPage> {
                                     const Color.fromARGB(240, 200, 47, 47),
                                 activeTrackColor:
                                     const Color.fromARGB(197, 136, 136, 223),
-                                overlayColor: Color.fromARGB(0x29, 9, 192, 248),
+                                overlayColor:
+                                    const Color.fromARGB(0x29, 9, 192, 248),
                                 thumbShape: const RoundSliderThumbShape(
                                     enabledThumbRadius: 10.0,
                                     disabledThumbRadius: 8.0,
@@ -229,10 +235,11 @@ class _InputPageState extends State<InputPage> {
               children: <Widget>[
                 Expanded(
                   child: ReusableCard(
+                      boxShape: BoxShape.circle,
                       colour: kaInactiveCardColour,
                       cardChild: Column(
                         children: [
-                          Text(
+                          const Text(
                             "Weight",
                             style: kalabelTextStyle,
                           ),
@@ -245,10 +252,29 @@ class _InputPageState extends State<InputPage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               //crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                FloatingActionButton(
-                                    child: Icon(Icons.add), onPressed: () {}),
-                                FloatingActionButton(
-                                    onPressed: () {}, child: Icon(Icons.add))
+                                RoundIconButton(
+                                  icon: FontAwesomeIcons.plus,
+                                  onPressed: () {
+                                    setState(() {
+                                      weight = weight + 1;
+                                    });
+                                  },
+                                ),
+                                const SizedBox(
+                                  width: 10.0,
+                                ),
+                                RoundIconButton(
+                                  icon: FontAwesomeIcons.minus,
+                                  onPressed: () {
+                                    setState(() {
+                                      weight = weight - 1;
+                                    });
+                                  },
+                                ),
+                                // FloatingActionButton(
+                                //     child: Icon(Icons.add), onPressed: () {}),
+                                // FloatingActionButton(
+                                //     onPressed: () {}, child: Icon(Icons.add))
                               ],
                             ),
                           ),
@@ -260,25 +286,142 @@ class _InputPageState extends State<InputPage> {
                       ),
                 ),
                 Expanded(
-                    child: ReusableCard(
-                        colour: kaInactiveCardColour,
-                        cardChild: IconContent(
-                            label: "HELLO", icon: FontAwesomeIcons.mars)
-                        // Column(children: const [Icon(FontAwesomeIcons.mars)]),
+                  child: ReusableCard(
+                    boxShape: BoxShape.circle,
+                    colour: kaInactiveCardColour,
+                    cardChild: Column(
+                      children: [
+                        const Text(
+                          "age",
+                          style: kalabelTextStyle,
+                        ),
+                        Text(
+                          age.toString(),
+                          style: kalabelTextStyle,
+                        ),
+                        Expanded(
+                            child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundIconButton(
+                                icon: FontAwesomeIcons.plus,
+                                onPressed: () {
+                                  setState(() {
+                                    age++;
+                                  });
+                                }),
+                            // FloatingActionButton(
+                            //   child: Icon(Icons.add),
+                            //   onPressed: () {},
+                            // ),
+                            const SizedBox(
+                              width: 10.0,
+                            ),
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.minus,
+                              onPressed: () {
+                                setState(() {
+                                  age--;
+                                });
+                              },
+                            )
+                            // FloatingActionButton(
+                            //   child: Icon(Icons.add),
+                            //   onPressed: () {},
+                            //   backgroundColor: Color.fromARGB(141, 11, 226, 79),
+                            // ),
+                          ],
                         ))
+                      ],
+                    ),
+                    // cardChild: IconContent(
+                    //   label: "HELLO",
+                    //   icon: FontAwesomeIcons.mars,
+                    // )
+                    // Column(children: const [Icon(FontAwesomeIcons.mars)]),
+                  ),
+                )
               ],
             ),
           ),
 
           // adding the bottom bar of red
-          Expanded(
-              child: Container(
-            width: double.infinity,
-            height: kaBottomContainerHeight,
-            color: kaBottomContainerColour,
-          ))
+          BottomButton(
+            buttonTitle: "CALCULATE",
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ResultsPage()));
+            },
+          )
         ],
       ),
+    );
+  }
+}
+//this can be an error where the the setstate may be defined inside the on pressed
+// class RoundIconButton extends StatefulWidget {
+//   //const RoundIconButton({Key? key}) : super(key: key);
+
+//   RoundIconButton({required this.icon, required this.onPressed});
+//   final IconData icon;
+//   final Function onPressed;
+
+//   @override
+//   State<RoundIconButton> createState() => _RoundIconButtonState();
+// }
+
+// class _RoundIconButtonState extends State<RoundIconButton> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return RawMaterialButton(
+//       child: Icon(widget.icon),
+//       //disabled elevation
+//       //enabled elevation
+//       constraints: const BoxConstraints.tightFor(
+//         width: 56.0,
+//         height: 56.0,
+//       ),
+//       shape: const CircleBorder(),
+//       fillColor: const Color.fromARGB(255, 21, 255, 4),
+//       onPressed: onPressed,
+//     );
+//   }
+// }
+class RoundIconButton extends StatelessWidget {
+  RoundIconButton({required this.icon, required this.onPressed});
+  final IconData icon;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Icon(icon),
+          Ink(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Color(0xff374ABE), Color(0xff64B6FF)],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              ),
+            ),
+          ),
+        ],
+      ),
+
+      elevation: 0.0,
+      onPressed: onPressed,
+      //disabled elevation
+      //enabled elevation
+      constraints: const BoxConstraints.tightFor(
+        width: 56.0,
+        height: 56.0,
+      ),
+      shape: const CircleBorder(),
+      fillColor: Color.fromARGB(158, 159, 240, 187),
     );
   }
 }

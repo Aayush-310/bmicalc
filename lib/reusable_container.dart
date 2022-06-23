@@ -9,10 +9,14 @@ class ReusableCard extends StatelessWidget {
   //constructors are needed for the property that is to be set while using the class
   // ignore: use_key_in_widget_constructors
   const ReusableCard(
-      {required this.colour, required this.cardChild, this.onPress});
+      {required this.colour,
+      required this.cardChild,
+      this.onPress,
+      required this.boxShape});
 
   final Color colour;
   final Widget cardChild;
+  final BoxShape boxShape;
   //using the voidcallback for accepting void instead of a function which must be initialized
   //also final void function onpress can be used to initialize the function
   final VoidCallback? onPress;
@@ -24,8 +28,9 @@ class ReusableCard extends StatelessWidget {
         child: cardChild,
         margin: const EdgeInsets.all(15.0),
         decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+          //borderRadius: const BorderRadius.all(Radius.circular(10.0)),
           color: colour,
+          shape: boxShape,
         ),
         padding: const EdgeInsets.all(25.0),
       ),
