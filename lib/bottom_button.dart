@@ -1,3 +1,4 @@
+import 'package:bmicalc/main.dart';
 import 'package:flutter/material.dart';
 import 'constants.dart';
 
@@ -12,12 +13,26 @@ class BottomButton extends StatelessWidget {
       onTap: onTap,
       child: Expanded(
           child: Container(
-        child: Center(
-          child: Text(
-            buttonTitle,
-            style: kaLargeTextStyle,
-          ),
-        ),
+        child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Center(
+                child: Text(
+                  buttonTitle,
+                  style: kaLargeTextStyle,
+                ),
+              ),
+              Ink(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Color(0xff374ABE), Color(0xff64B6FF)],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                  ),
+                ),
+              ),
+            ]),
         width: double.infinity,
         margin: EdgeInsets.only(top: 10.0),
         padding: EdgeInsets.only(bottom: 20.0),
